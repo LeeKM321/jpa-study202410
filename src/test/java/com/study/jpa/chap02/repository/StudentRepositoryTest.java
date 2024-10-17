@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +52,9 @@ class StudentRepositoryTest {
         String name = "춘식이";
 
         // when
-        List<Student> list = studentRepository.findByName(name);
+        List<Student> list = studentRepository.findByNameOrderByMajorDesc(name);
+
+        studentRepository.findByMajorContaining(name, Sort.by(Sort.Order.desc("city")));
 
         // then
         assertEquals(1, list.size());
@@ -119,7 +122,7 @@ class StudentRepositoryTest {
         studentRepository.deleteByNameAndCityWithJPQL(name, city);
 
         // then
-        assertEquals(0, studentRepository.findByName(name).size());
+        assertEquals(0, studentRepository.findByNameOrderByMajorDesc(name).size());
     }
 
 

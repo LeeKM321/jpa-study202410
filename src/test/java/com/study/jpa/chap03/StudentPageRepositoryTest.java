@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -43,7 +44,16 @@ class StudentPageRepositoryTest {
 
         // 페이지 정보 객체 생성 (Pageable)
         // 여기서는 페이지 번호가 zero-based임: 1페이지를 0으로 취급
-        Pageable pageInfo = PageRequest.of(pageNo - 1, amount);
+        Pageable pageInfo = PageRequest.of(
+                pageNo - 1,
+                amount,
+//                Sort.by("name").descending() // 정렬 기준은 필드명!!! 컬럼명 (x)
+                // 여러 조건으로 정렬
+                Sort.by(
+                        Sort.Order.desc("name"),
+                        Sort.Order.asc("city")
+                )
+        );
 
         // when
         Page<Student> students = repository.findAll(pageInfo);
