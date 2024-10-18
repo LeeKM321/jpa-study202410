@@ -2,11 +2,14 @@ package com.study.jpa.chap04.repository;
 
 import com.study.jpa.chap04.entity.Department;
 import com.study.jpa.chap04.entity.Employee;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -52,6 +55,46 @@ class EmployeeRepositoryTest {
         employeeRepository.save(e3);
         employeeRepository.save(e4);
     }
+
+    @Test
+    @DisplayName("특정 사원의 정보를 조회하면 그 사원의 부서 정보도 얻을 수 있을 것이다.")
+    void testFindOne() {
+        // given
+        Long id = 2L;
+
+        // when
+        Employee employee
+                = employeeRepository.findById(id).orElseThrow();
+
+        // then
+        System.out.println("\n\n\n");
+        System.out.println("employee = " + employee);
+        System.out.println("\n\n\n");
+
+        assertEquals("어피치", employee.getName());
+
+    }
+
+    @Test
+    @DisplayName("부서 정보 조회")
+    void testFindDept() {
+        // given
+        Long id = 1L;
+
+        // when
+        Department department
+                = departmentRepository.findById(id).orElseThrow();
+
+        // then
+        System.out.println("\n\n\n");
+        System.out.println("department = " + department);
+        System.out.println("\n\n\n");
+
+    }
+
+
+
+
 
 
 }
