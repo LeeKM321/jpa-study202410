@@ -128,6 +128,55 @@ class DepartmentRepositoryTest {
 
         // then
     }
+    
+    @Test
+    @DisplayName("부서가 사라지면 해당 사원도 함께 사라진다.")
+    void cascadeRemoveTest() {
+        // given
+        Department department = departmentRepository.findById(1L).orElseThrow();
+
+        // when
+        departmentRepository.delete(department);
+    
+        // then
+    }
+
+    @Test
+    @DisplayName("고아 객체 삭제")
+    void orphanRemovalTest() {
+        // given
+
+        // 2번 부서 조회
+        Department department
+                = departmentRepository.findById(2L).orElseThrow();
+
+        // 2번 부서 사원 목록 가져오기
+        List<Employee> employeeList = department.getEmployees();
+
+        // when
+
+        Employee employee = employeeList.get(1);
+        employeeList.remove(employee);
+
+        // then
+    }
+
+    @Test
+    @DisplayName("양방향 관계에서 CascadeType을 PERSIST를 주면 부모가 데이터 변경의 주체가 된다.")
+    void cascadePersistTest() {
+        // given
+        Department department = departmentRepository.findById(2L).orElseThrow();
+
+        Employee pororo = Employee.builder()
+                .name("뽀로로")
+                .department(department) // 속할 부서를 전달해 줘야 합니다.
+                .build();
+
+        // when
+        department.getEmployees().add(pororo);
+
+        // then
+    }
 
 
 }
