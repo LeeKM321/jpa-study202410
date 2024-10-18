@@ -21,13 +21,16 @@ public class Idol {
 
     private int age;
 
+    private String gender; // 성별
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
     private Group group;
 
-    public Idol(String idolName, int age, Group group) {
+    public Idol(String idolName, int age, String gender, Group group) {
         this.idolName = idolName;
         this.age = age;
+        this.gender = gender;
         if (group != null) {
             changeGroup(group);
         }

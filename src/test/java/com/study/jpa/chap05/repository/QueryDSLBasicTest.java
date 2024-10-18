@@ -36,25 +36,25 @@ class QueryDSLBasicTest {
     @Autowired
     EntityManager em;
 
-    @Test
-    void setUp() {
-        //given
-        Group leSserafim = new Group("르세라핌");
-        Group ive = new Group("아이브");
-        groupRepository.save(leSserafim);
-        groupRepository.save(ive);
-
-
-
-        Idol idol1 = new Idol("김채원", 24, leSserafim);
-        Idol idol2 = new Idol("사쿠라", 26, leSserafim);
-        Idol idol3 = new Idol("가을", 22, ive);
-        Idol idol4 = new Idol("리즈", 20, ive);
-        idolRepository.save(idol1);
-        idolRepository.save(idol2);
-        idolRepository.save(idol3);
-        idolRepository.save(idol4);
-    }
+//    @Test
+//    void setUp() {
+//        //given
+//        Group leSserafim = new Group("르세라핌");
+//        Group ive = new Group("아이브");
+//        groupRepository.save(leSserafim);
+//        groupRepository.save(ive);
+//
+//
+//
+//        Idol idol1 = new Idol("김채원", 24, leSserafim);
+//        Idol idol2 = new Idol("사쿠라", 26, leSserafim);
+//        Idol idol3 = new Idol("가을", 22, ive);
+//        Idol idol4 = new Idol("리즈", 20, ive);
+//        idolRepository.save(idol1);
+//        idolRepository.save(idol2);
+//        idolRepository.save(idol3);
+//        idolRepository.save(idol4);
+//    }
 
     @Test
     @DisplayName("JPQL로 특정이름의 아이돌 조회하기")
