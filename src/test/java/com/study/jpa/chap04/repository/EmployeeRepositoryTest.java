@@ -1,7 +1,9 @@
 package com.study.jpa.chap04.repository;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.study.jpa.chap04.entity.Department;
 import com.study.jpa.chap04.entity.Employee;
+import com.study.jpa.chap04.entity.QEmployee;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.study.jpa.chap04.entity.QEmployee.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -23,6 +26,9 @@ class EmployeeRepositoryTest {
 
     @Autowired
     DepartmentRepository departmentRepository;
+
+    @Autowired
+    JPAQueryFactory factory;
 
     @Test
     void beforeInsert() {
@@ -91,6 +97,7 @@ class EmployeeRepositoryTest {
         System.out.println("\n\n\n");
 
     }
+
 
 
 
