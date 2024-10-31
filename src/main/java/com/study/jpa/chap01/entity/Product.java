@@ -22,7 +22,7 @@ public class Product {
     @Column(name = "prod_id")
     private Long id;
 
-    @Column(name = "prod_nm", length = 30, nullable = false)
+    @Column(name = "prod_nm", length = 30, nullable = false, unique = true)
     private String name;
 
     @Column(name = "prod_price")
